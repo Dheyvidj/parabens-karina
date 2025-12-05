@@ -51,8 +51,8 @@ export default function Home() {
                         <h2 className="text-2xl">Eu te amo muito...</h2>
                     </div>
                     <div className="gap-3 flex flex-col max-w-xl">
-                        <p className="text-lg">Como hoje é um dia especial, preparei uma pequena surpresa para você.</p>
-                        <p className="text-lg">Para descobrir, você precisa passar por um desafio que testará sua atenção aos detalhes...</p>
+                        <p className="text-lg">Como hoje é um dia especial, vamos celebrar de um jeito divertido!</p>
+                        <p className="text-lg">Criei um desafio que testará sua atenção aos detalhes...</p>
                         <p className="text-xl font-bold mt-2">O JOGO DOS 7 ERROS:</p>
                         <Button
                             onClick={handleStartGame}
