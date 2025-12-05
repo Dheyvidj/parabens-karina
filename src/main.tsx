@@ -6,9 +6,8 @@ import {
 } from "react-router-dom";
 import App from './App.tsx'
 import './index.css'
-import GameOld from './modules/gameOld/index.tsx';
+import { Game } from './modules/game/index.tsx';
 import Home from './modules/home/index.tsx';
-import Final from './modules/final/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,12 +18,8 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path: 'game-old',
-        element: <GameOld />
-      },
-      {
-        path: 'final',
-        element: <Final/>
+        path: 'game',
+        element: <Game />
       },
     ]
   },
