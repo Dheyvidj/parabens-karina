@@ -2,14 +2,21 @@
 import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 
+// Definição do tipo para cada clique
+interface Click {
+    id: number;
+    x: number;
+    y: number;
+}
+
 // Adicione a imagem da sua esposa na pasta 'public' e atualize o caminho aqui
-const IMAGE_URL = '/esposa.jpg'; 
+const IMAGE_URL = '/esposa.jpg';
 
 export function Game() {
     const [timeLeft, setTimeLeft] = useState(60);
     const [showEndMessage, setShowEndMessage] = useState(false);
-    const [gaveUp, setGaveUp] = useState(false);
-    const [clicks, setClicks] = useState([]); // To store click coordinates
+    // O estado 'gaveUp' foi removido pois não era mais utilizado na mensagem final unificada.
+    const [clicks, setClicks] = useState<Click[]>([]); // Estado com tipagem explícita
     const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
     useEffect(() => {
@@ -31,7 +38,8 @@ export function Game() {
         }
     }, [timeLeft, showEndMessage]);
 
-    const handleImageClick = (e) => {
+    // Evento de clique com o tipo React.MouseEvent
+    const handleImageClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (showEndMessage) return;
 
         const rect = e.currentTarget.getBoundingClientRect();
@@ -47,7 +55,7 @@ export function Game() {
     };
 
     const handleGiveUp = () => {
-        setGaveUp(true);
+        // setGaveUp(true); // Removido
         setShowEndMessage(true);
     };
 
@@ -56,8 +64,8 @@ export function Game() {
         <div className="w-full max-w-5xl mx-auto p-4">
             <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center">Jogo dos 7 Erros</h1>
             <p className="text-md md:text-lg mb-4 text-center">Encontre os 7 erros na imagem abaixo. Você tem {timeLeft} segundos!</p>
-            
-            <div 
+
+            <div
                 className="relative w-full cursor-pointer"
                 onClick={handleImageClick}
             >
@@ -67,7 +75,7 @@ export function Game() {
                 </div>
 
                 {clicks.map(({ id, x, y }) => (
-                    <div 
+                    <div
                         key={id}
                         className="absolute text-white bg-red-600 px-2 py-1 rounded-lg text-sm md:text-md font-bold shadow-lg animate-pulse"
                         style={{ top: `${y}px`, left: `${x}px`, transform: 'translate(-50%, -50%)', zIndex: 10 }}
@@ -93,22 +101,22 @@ export function Game() {
         <>
             <Confetti width={windowSize.width} height={windowSize.height} />
             <div className="text-center max-w-3xl p-4 animate-fade-in">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">Parabéns, meu amor!</h1>
-                
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">Feliz Aniversário, Amor!</h1>
+
                 <p className="text-lg mb-4">
-                    A verdade é que eu te fiz procurar por um erro que não existe, porque pra mim você é perfeita em cada detalhe.
+                    Desculpa a brincadeira, mas eu precisava prender sua atenção para te dizer uma verdade: não existe erro nenhum aqui, assim como não mudaria nada em você. Você é perfeita do jeito que é.
                 </p>
                 <p className="text-lg mb-4">
-                    Neste dia mais que especial, quero deixar claro minha gratidão por ter você ao meu lado, compartilhando muitas alegrias, superando cada desafios e construindo lindas memórias. Sua simples presença enche minha vida de amor e alegria.
+                    Hoje celebra-se o seu dia, mas o presente é meu por ter você caminhando ao meu lado. Obrigado por ser minha parceira, minha força nos momentos difíceis e a razão dos meus melhores sorrisos.
                 </p>
                 <p className="text-lg mb-4">
-                    Poucas coisas na vida podemos garantir total certeza, mas se eu tivesse que escolher apenas uma, pra dizer que essa é a coisa que mais tenho certeza, é que eu te amo, e poder estar ao seu lado compartilhando a vida é o melhor presente que eu poderia ter.
+                    Num mundo cheio de incertezas, o meu amor por você é minha verdade absoluta. Não há lugar onde eu preferisse estar do que aqui, construindo nossa família juntos.
                 </p>
                 <p className="text-lg mb-4">
-                    Lembre-se de que estou aqui para apoiar, amar e ficar orgulhoso por cada conquista sua. Você é a luz que ilumina meu mundo, e quero passar muitos mais aniversários ao seu lado.
+                    Conte comigo para ser seu apoio, seu fã número um e seu eterno apaixonado. Que seu novo ciclo seja tão incrível quanto você é para mim.
                 </p>
                 <p className="text-xl font-bold mt-8">
-                    Te amo infinitamente e aproveita seu dia, minha pretinha.
+                    Te amo infinitamente minha pretinha!
                 </p>
             </div>
         </>
